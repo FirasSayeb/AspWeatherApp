@@ -2,9 +2,9 @@
     ViewBag.Title = "Weather App";
 }
 
-<h1>Weather App</h1>
 
-<div class="col-md-6">
+
+<div class="col-md-6" id="div1">
     <label for="city" class="form-label">City:</label>
     <input type="text" class="form-control" id="city" placeholder="Enter a city" />
     <button id="saveDataButton" class="btn btn-primary mt-3" style="display:none;">Save to Database</button>
@@ -154,7 +154,7 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify(graphData),
-                success: function (response) {
+                success: function (response) {  
                     console.log("success", response);
                 },
                 error: function (xhr, status, error) {

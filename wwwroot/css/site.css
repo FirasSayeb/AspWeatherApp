@@ -13,14 +13,11 @@ html {
   min-height: 100%;
 }
 
-body {
-    text-align:center;
-  margin-bottom: 60px;
-}
 
-div {
+
+#div1{
     margin-left:25%;
 }
-li:hover{
+ul li:hover{
     background-color:gray;
 }

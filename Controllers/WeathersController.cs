@@ -102,7 +102,7 @@ namespace WeaterApp.Controllers
 
             return Ok("Weather data saved successfully.");     
         }
-           
+            
 
         // GET: Weathers/Edit/5
         public async Task<IActionResult> Edit(int? id)
