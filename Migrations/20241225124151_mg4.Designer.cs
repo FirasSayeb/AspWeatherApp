@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeaterApp.Data;
 
@@ -10,9 +11,10 @@ using WeaterApp.Data;
 namespace WeaterApp.Migrations
 {
     [DbContext(typeof(WeaterAppContext))]
-    partial class WeaterAppContextModelSnapshot : ModelSnapshot
+    [Migration("20241225124151_mg4")]
+    partial class mg4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

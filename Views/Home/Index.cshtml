@@ -19,10 +19,9 @@
     const input = document.getElementById('city');
     const suggestionsList = document.getElementById('suggestions');
     const weatherChart = document.getElementById('weatherChart');
-    const saveDataButton = document.getElementById('saveDataButton');
+    const saveDataButton = document.getElementById('saveDataButton');  
     let chartInstance;
-    let graphData = {}; // To store graph data for saving
-
+    let graphData = {}; 
     input.addEventListener('input', async () => {
         const city = input.value.trim();
 
@@ -64,12 +63,13 @@
                             const temperatures = hourlyData.temperature_2m;
                             const windSpeeds = hourlyData.wind_speed_10m;
                             const humidities = hourlyData.relative_humidity_2m;
-
+                             
                             graphData = {
                                 city: item.display_name,
                                 temperature: temperatures,
                                 windSpeed: windSpeeds,
-                                humidity: humidities
+                                humidity: humidities,
+                                time:labels
                             };
 
                             if (chartInstance) {
@@ -147,7 +147,7 @@
         try {
             
            
-
+            console.log(graphData)
             $.ajax({
                 url: '@Url.Action("Create", "Weathers")',
                 type: 'POST',

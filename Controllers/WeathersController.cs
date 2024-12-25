@@ -69,9 +69,9 @@ namespace WeaterApp.Controllers
              return View(weather);
          }
         */
+        [HttpPost]
         [AllowAnonymous]
         [IgnoreAntiforgeryToken]
-        [HttpPost]
         public async Task<IActionResult> Create([FromBody] WeatherData weatherData)
         {
             if (weatherData == null || weatherData.temperature == null)
@@ -79,30 +79,36 @@ namespace WeaterApp.Controllers
                 return BadRequest("Invalid weather data.");
             }
 
-            Console.WriteLine($"City: {weatherData.city}");
-            Console.WriteLine($"Temperature: {string.Join(", ", weatherData.temperature)}");
-            Console.WriteLine($"WindSpeed: {string.Join(", ", weatherData.windSpeed)}");
-            Console.WriteLine($"Humidity: {string.Join(", ", weatherData.humidity)}");
-
-            var weatherEntries = new List<Weather>();
-
-            for (int i = 0; i < weatherData.temperature.Length; i++)
+            try
             {
-                weatherEntries.Add(new Weather
+                Console.WriteLine("Received weather data:");
+                Console.WriteLine($"City: {weatherData.city}");
+                Console.WriteLine($"Temperature: {string.Join(", ", weatherData.temperature)}");
+                Console.WriteLine($"Wind Speed: {string.Join(", ", weatherData.windSpeed)}");
+                Console.WriteLine($"Humidity: {string.Join(", ", weatherData.humidity)}");
+
+                var weatherEntries = weatherData.temperature.Select((temp, index) => new Weather
                 {
                     City = weatherData.city,
-                    Temperature = weatherData.temperature[i],
-                    WindSpeed = weatherData.windSpeed[i],
-                    Humidity = weatherData.humidity[i],  
-                });
+                    Temperature = temp,
+                    WindSpeed = weatherData.windSpeed[index],
+                    Humidity = weatherData.humidity[index],
+                    time = weatherData.time[index]
+                }).ToList();
+
+                await _context.Weather.AddRangeAsync(weatherEntries);
+                await _context.SaveChangesAsync();
+
+                return Ok("Weather data saved successfully.");
             }
-
-            _context.Weather.AddRange(weatherEntries);
-            await _context.SaveChangesAsync();
-
-            return Ok("Weather data saved successfully.");     
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error saving weather data: " + ex.Message);
+                return StatusCode(500, "Internal server error.");
+            }
         }
-            
+
+
 
         // GET: Weathers/Edit/5
         public async Task<IActionResult> Edit(int? id)
