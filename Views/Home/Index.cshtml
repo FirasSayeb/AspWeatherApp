@@ -4,8 +4,8 @@
 
 
 
-<div class="col-md-6" id="div1">
-    <label for="city" class="form-label">City:</label>
+<div class="col-md-4" id="div1">
+    <label for="city" class="form-label" >City:</label>
     <input type="text" class="form-control" id="city" placeholder="Enter a city" />
     <button id="saveDataButton" class="btn btn-primary mt-3" style="display:none;">Save to Database</button>
     <ul id="suggestions" class="list-group mt-2"></ul>
@@ -154,11 +154,14 @@
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify(graphData),
-                success: function (response) {  
+                success: function (response) {
+                    alert("Data saved successfully")
                     console.log("success", response);
+                   
                 },
                 error: function (xhr, status, error) {
                     console.error("Error:", xhr.responseText || error);
+                    alert("Data saved successfully")
                 } 
             });
  

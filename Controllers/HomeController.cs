@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 using System.Diagnostics;
 using WeaterApp.Models;
 
@@ -26,6 +28,42 @@ namespace WeaterApp.Controllers
         public IActionResult Predict()
         {
             return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        [IgnoreAntiforgeryToken]
+        public IActionResult Predict(string city,string time)
+        {
+
+
+            
+             
+                string t=time.Substring(11);
+           
+            var sampleData = new PredictWeather.ModelInput()
+            {
+                  
+                City = city,
+                Time = t,
+            };
+
+            //Load model and predict output  
+            var result = PredictWeather.Predict(sampleData);
+             
+            
+           
+           
+               
+            return RedirectToAction("Result", new { temperateur = result.Score,city=city,time=time});  
+        }
+
+        public IActionResult Result(double temperateur, string city,string time)
+        {
+            Result res=new Result();
+            res.city=city;
+            res.time=time;    
+            res.temperateur = temperateur;
+            return View(res);
         }
         public IActionResult Save()
         {

@@ -17,6 +17,7 @@ html {
 
 #div1{
     margin-left:25%;
+    text-align:center;
 }
 ul li:hover{
     background-color:gray; 

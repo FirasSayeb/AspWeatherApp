@@ -1,4 +1,6 @@
-﻿@*
+﻿
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -6,3 +8,14 @@
 @{
     ViewBag.Title = "Predict";
 }
+
+<form asp-action="Predict" class="col-md-4" style="text-align:center; margin-left:20%;">
+    <label for="city" class="control-label">City : </label>
+    <input type="text" id="city" name="city" class="form-control" required />
+    <label for="time" class="control-label"> Time : </label>
+    <input type="datetime-local" id="time" name="time" class="form-control" required />
+    <br />
+    <input type="reset" class="btn btn-danger" />
+    <input type="submit" class="btn btn-primary" />  
+
+</form>
