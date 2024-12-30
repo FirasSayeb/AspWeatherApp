@@ -1,6 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Weather App";
-}
+    ViewBag.Title = "Home";
+}   
 
 
 
@@ -16,7 +16,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const input = document.getElementById('city');
+    const input = document.getElementById('city');     
     const suggestionsList = document.getElementById('suggestions');
     const weatherChart = document.getElementById('weatherChart');
     const saveDataButton = document.getElementById('saveDataButton');  
@@ -167,7 +167,7 @@
  
 
 
-        } catch (error) {
+        } catch (error) {       
             console.error('Error saving data:', error);
         }
     });

@@ -12,6 +12,7 @@
 <form asp-action="Predict" class="col-md-4" style="text-align:center; margin-left:20%;">
     <label for="city" class="control-label">City : </label>
     <input type="text" id="city" name="city" class="form-control" required />
+    <ul id="suggestions" class="list-group mt-2"></ul>
     <label for="time" class="control-label"> Time : </label>
     <input type="datetime-local" id="time" name="time" class="form-control" required />
     <br />
@@ -19,3 +20,41 @@
     <input type="submit" class="btn btn-primary" />  
 
 </form>
+<script>
+    const input = document.getElementById('city');
+    const suggestionsList = document.getElementById('suggestions');
+    input.addEventListener('input', async () => {
+        const city = input.value.trim();
+        if (!city) {
+            suggestionsList.innerHTML = '';
+            return;
+        }
+        try {
+            const response = await fetch("https://nominatim.openstreetmap.org/search?q=" + encodeURIComponent(city) + "&format=jsonv2");
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data)
+
+                suggestionsList.innerHTML = '';
+
+                data.forEach(item => {  
+                    const li = document.createElement('li');       
+                    li.textContent = item.display_name;
+                    li.classList.add('list-group-item');   
+                    li.style.cursor = 'pointer';
+               
+                    suggestionsList.appendChild(li);
+
+                    li.addEventListener('click', async () => {
+                        suggestionsList.innerHTML = '';
+                        input.value = item.display_name;
+                    });
+                   
+                });
+            }
+                      
+                    }catch (e) {
+                        console.log(e);
+                    }
+    });
+</script>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using System.Diagnostics;
+using WeaterApp.Data;
 using WeaterApp.Models;
 
 namespace WeaterApp.Controllers
@@ -10,9 +11,12 @@ namespace WeaterApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly WeaterAppContext _context;
+
+        public HomeController(ILogger<HomeController> logger, WeaterAppContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -38,21 +42,22 @@ namespace WeaterApp.Controllers
 
             
              
-                string t=time.Substring(11);
-           
+                string t=time.Substring(11);            
+
             var sampleData = new PredictWeather.ModelInput()
             {
-                  
-                City = city,
-                Time = t,
-            };
 
-            //Load model and predict output  
-            var result = PredictWeather.Predict(sampleData);
+                City = city,   
+                Time = t,
+                WindSpeed = (float) _context.Weather.Where(w => w.City.Contains(city)).Average(w=>w.WindSpeed),
+                Humidity= (float)_context.Weather.Where(w => w.City.Contains(city)).Average(w => w.Humidity)  
+            };
              
-            
-           
-           
+            //Load model and predict output         
+            var result = PredictWeather.Predict(sampleData);       
+                            
+               
+                        
                
             return RedirectToAction("Result", new { temperateur = result.Score,city=city,time=time});  
         }

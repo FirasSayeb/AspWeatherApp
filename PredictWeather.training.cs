@@ -36,11 +36,11 @@ namespace WeaterApp
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(@"City", @"City", outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
+            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"City", @"City"),new InputOutputColumnPair(@"time", @"time")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
                                     .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Id", @"Id"),new InputOutputColumnPair(@"WindSpeed", @"WindSpeed"),new InputOutputColumnPair(@"Humidity", @"Humidity")}))      
-                                    .Append(mlContext.Transforms.Text.FeaturizeText(inputColumnName:@"time",outputColumnName:@"time"))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"City",@"Id",@"WindSpeed",@"Humidity",@"time"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=13,MinimumExampleCountPerLeaf=12,NumberOfTrees=4,MaximumBinCountPerFeature=222,FeatureFraction=0.913080986874278,LearningRate=0.897947193991173,LabelColumnName=@"Temperature",FeatureColumnName=@"Features"}));
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"City",@"time",@"Id",@"WindSpeed",@"Humidity"}))      
+                                    .Append(mlContext.Transforms.NormalizeMinMax(@"Features", @"Features"))      
+                                    .Append(mlContext.Regression.Trainers.FastTreeTweedie(new FastTreeTweedieTrainer.Options(){NumberOfLeaves=25,MinimumExampleCountPerLeaf=10,NumberOfTrees=417,MaximumBinCountPerFeature=173,FeatureFraction=0.99999999,LearningRate=0.999999776672986,LabelColumnName=@"Temperature",FeatureColumnName=@"Features"}));
 
             return pipeline;
         }
