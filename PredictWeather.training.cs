@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
-using Microsoft.ML.Trainers.FastTree;
+using Microsoft.ML.Trainers.LightGbm;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
 using Microsoft.ML;
@@ -37,10 +37,9 @@ namespace WeaterApp
         {
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"City", @"City"),new InputOutputColumnPair(@"time", @"time")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Id", @"Id"),new InputOutputColumnPair(@"WindSpeed", @"WindSpeed"),new InputOutputColumnPair(@"Humidity", @"Humidity")}))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"City",@"time",@"Id",@"WindSpeed",@"Humidity"}))      
-                                    .Append(mlContext.Transforms.NormalizeMinMax(@"Features", @"Features"))      
-                                    .Append(mlContext.Regression.Trainers.FastTreeTweedie(new FastTreeTweedieTrainer.Options(){NumberOfLeaves=25,MinimumExampleCountPerLeaf=10,NumberOfTrees=417,MaximumBinCountPerFeature=173,FeatureFraction=0.99999999,LearningRate=0.999999776672986,LabelColumnName=@"Temperature",FeatureColumnName=@"Features"}));
+                                    .Append(mlContext.Transforms.ReplaceMissingValues(@"Id", @"Id"))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"City",@"time",@"Id"}))      
+                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=27,NumberOfIterations=37,MinimumExampleCountPerLeaf=20,LearningRate=0.999999776672986,LabelColumnName=@"Temperature",FeatureColumnName=@"Features",ExampleWeightColumnName=null,Booster=new GradientBooster.Options(){SubsampleFraction=0.999999776672986,FeatureFraction=0.969763102828314,L1Regularization=9.95383600118229E-10,L2Regularization=0.186650626605746},MaximumBinCountPerFeature=242}));
 
             return pipeline;
         }

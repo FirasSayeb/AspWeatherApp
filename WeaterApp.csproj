@@ -12,6 +12,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.ML" Version="1.7.1" />
     <PackageReference Include="Microsoft.ML.FastTree" Version="1.7.1" />
+    <PackageReference Include="Microsoft.ML.LightGbm" Version="1.7.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
   </ItemGroup>
   <ItemGroup>

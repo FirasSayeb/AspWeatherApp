@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c0+iHSzeZfwbbgw/hBeWyeRE0JOwgAOr3C3CexrdHCdFycZTu13M+F2BEhrv9F+sN0VMzKbIiQToTJ0EaGrFAQ==",
+  "dgSpecHash": "vV9hUfLOvFkBfprT5eHKO3rSyDaUWXg2Ls06WlylpH/1uyuZ4KjIQZdxkjE9WCE4R7YUC2Hq+FPnhmhtRDDr3A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ce PC\\source\\repos\\WeaterApp\\WeaterApp\\WeaterApp.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "C:\\Users\\Ce PC\\.nuget\\packages\\humanizer.core.zh-cn\\2.14.1\\humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "C:\\Users\\Ce PC\\.nuget\\packages\\lightgbm\\2.3.1\\lightgbm.2.3.1.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
@@ -100,6 +101,7 @@
     "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.ml.cpumath\\1.7.1\\microsoft.ml.cpumath.1.7.1.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.ml.dataview\\1.7.1\\microsoft.ml.dataview.1.7.1.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.ml.fasttree\\1.7.1\\microsoft.ml.fasttree.1.7.1.nupkg.sha512",
+    "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.ml.lightgbm\\1.7.1\\microsoft.ml.lightgbm.1.7.1.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Ce PC\\.nuget\\packages\\microsoft.visualstudio.debugger.contracts\\17.2.0\\microsoft.visualstudio.debugger.contracts.17.2.0.nupkg.sha512",
