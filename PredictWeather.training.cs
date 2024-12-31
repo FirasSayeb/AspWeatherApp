@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
-using Microsoft.ML.Trainers.LightGbm;
 using Microsoft.ML.Trainers;
 using Microsoft.ML.Transforms;
 using Microsoft.ML;
@@ -37,9 +36,9 @@ namespace WeaterApp
         {
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"City", @"City"),new InputOutputColumnPair(@"time", @"time")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.ReplaceMissingValues(@"Id", @"Id"))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"City",@"time",@"Id"}))      
-                                    .Append(mlContext.Regression.Trainers.LightGbm(new LightGbmRegressionTrainer.Options(){NumberOfLeaves=27,NumberOfIterations=37,MinimumExampleCountPerLeaf=20,LearningRate=0.999999776672986,LabelColumnName=@"Temperature",FeatureColumnName=@"Features",ExampleWeightColumnName=null,Booster=new GradientBooster.Options(){SubsampleFraction=0.999999776672986,FeatureFraction=0.969763102828314,L1Regularization=9.95383600118229E-10,L2Regularization=0.186650626605746},MaximumBinCountPerFeature=242}));
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"City",@"time"}))      
+                                    .Append(mlContext.Transforms.NormalizeMinMax(@"Features", @"Features"))      
+                                    .Append(mlContext.Regression.Trainers.LbfgsPoissonRegression(new LbfgsPoissonRegressionTrainer.Options(){L1Regularization=0.06361844F,L2Regularization=6.179577F,LabelColumnName=@"Temperature",FeatureColumnName=@"Features"}));
 
             return pipeline;
         }

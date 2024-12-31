@@ -57,7 +57,7 @@
                         const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`);
                         if (weatherResponse.ok) {
                             const weatherData = await weatherResponse.json();
-
+                            console.log(weatherData);
                             const hourlyData = weatherData.hourly;
                             const labels = hourlyData.time.map(time => new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
                             const temperatures = hourlyData.temperature_2m;

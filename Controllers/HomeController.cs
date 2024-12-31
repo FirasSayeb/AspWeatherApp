@@ -40,15 +40,15 @@ namespace WeaterApp.Controllers
         {
 
 
-                string t=time.Substring(11);            
+                             
                 
-            var sampleData = new PredictWeather.ModelInput()
+            var sampleData = new PredictWeather.ModelInput()     
             {
-
-                City = city,   
-                Time = t,
+                   
+                City = city,      
+                Time = time.Substring(11),   
                  
-            };          
+            };            
                     
             //Load model and predict output              
             var result = PredictWeather.Predict(sampleData);       
